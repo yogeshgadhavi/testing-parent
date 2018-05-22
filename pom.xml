@@ -11,83 +11,37 @@
 	<name>testing-parent</name>
 
     <properties>
+		<mule.runtime.community>true</mule.runtime.community>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.1.1</app.runtime>
-		<mule.maven.plugin.version>3.1.2</mule.maven.plugin.version>
-		
-
-    	<mule.tools.version>1.1</mule.tools.version>
-		<mule.home>C:/ANZ/Software/Mule/mule-ee-distribution-standalone-4.1.1/mule-enterprise-standalone-4.1.1</mule.home>
-	    <jdkName>JavaSE-1.8</jdkName>
-        <jdk.version>1.8</jdk.version>
-	    
-	    
-		 <mule.runtime.community>true</mule.runtime.community>
+		<mule.maven.plugin.version>3.1.1</mule.maven.plugin.version>
+		<munit.version>2.1.1</munit.version>
+	
+	
 		<anypoint.username>bimehta</anypoint.username>
 		<anypoint.password>Mel2018a</anypoint.password>
 		<anypoint.businessGroup>ANZ-Architecture-Simplification</anypoint.businessGroup>
-		<cloundhub.env>Sandbox</cloundhub.env>
 		<anypoint.uri>https://anypoint.mulesoft.com</anypoint.uri>
-		<businessGroup></businessGroup>
-		<arm.target.name>apprhel74mupoc08-mule4</arm.target.name>
+		<arm.target.name>test-apprhel74mutest08-mule411</arm.target.name>
 		<arm.target.type>server</arm.target.type>
 		<arm.environment>Sandbox</arm.environment>
-		<build.number>1</build.number>
-		
 		
 	</properties>
 
+	
 	<build>
-		<finalName>${project.artifactId}</finalName>
-		<pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.3.1</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-		
-		
 		<plugins>
 			<plugin>
-                <groupId>org.mule.tools</groupId>
-                <artifactId>maven-mule-plugin</artifactId>
-                <version>1.6</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <copyToAppsDirectory>false</copyToAppsDirectory>
-                    <excludeMuleDependencies>true</excludeMuleDependencies>
-                    <inclusions>
-                        <inclusion>
-                            <groupId>com.mulesoft.muleesb.transports</groupId>
-                            <artifactId>mule-transport-sap</artifactId>
-                        </inclusion>
-                    </inclusions>  
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.mule.transports</groupId>
-                            <artifactId>mule-transport-vm</artifactId>
-                        </exclusion>
-                    </exclusions>                                    
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <encoding>ISO-8859-1</encoding>
-                </configuration>
-            </plugin>
-		</plugins>
+			    <groupId>org.mule.tools.maven</groupId>
+			    <artifactId>mule-maven-plugin</artifactId>
+			    <version>${mule.maven.plugin.version}</version>
+			    <extensions>true</extensions>
+			</plugin>
+        </plugins>
 	</build>
-
+	
 	<!-- Mule Dependencies -->
 	<dependencies>
 		<!-- Xml configuration -->
@@ -177,119 +131,45 @@
    </distributionManagement>
 	<repositories>
           <repository>
-            <id>Central</id>
-            <name>Central</name>
-            <url>http://repo1.maven.org/maven2/</url>
+            <id>anypoint-exchange</id>
+            <name>Anypoint Exchange</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/maven</url>
             <layout>default</layout>
         </repository>
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases Repository</name>
-            <url>http://repository.mulesoft.org/releases/</url>
+            <url>https://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>mulesoft-release</id>
-            <name>mulesoft release repository</name>
-            <layout>default</layout>
-            <url>http://repository.mulesoft.org/releases/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
-
-
- <profiles>
-		<profile>
-			<id>standalone</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.mule.tools.maven</groupId>
-						<artifactId>mule-maven-plugin</artifactId>
-						 <version>3.1.2</version>
-						<configuration>
-							<deploymentType>standalone</deploymentType>
-							<muleVersion>${mule.version}</muleVersion>
-							<muleHome>${mule.home}</muleHome>
-							<deploymentTimeout>3000000</deploymentTimeout>
-							<applicationName>${project.artifactId}</applicationName>
-							<community>${mule.runtime.community}</community>
-						</configuration>
-						<executions>
-							<execution>
-								<id>deploy</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>cloudhub</id>
-			<build>
-				<plugins>
-					
-					<plugin>
-		            <groupId>org.mule.tools.maven</groupId>
-		            <artifactId>mule-maven-plugin</artifactId>
-		            <version>3.1.2</version>
-		            <configuration>
-		               <deploymentType>cloudhub</deploymentType>
-		               <muleVersion>${mule.version}</muleVersion>
-		               <username>${anypoint.username}</username>
-				<password>${anypoint.password}</password>
-		               <workerType>Micro</workerType>
-		               <redeploy>true</redeploy>
-		               <environment>Sandbox</environment>
-				    <application>target/${project.artifactId}-${project.version}.zip</application>
- 				<applicationName>cloudhub-${project.artifactId}</applicationName>
-		            </configuration>
-		            <executions>
-		               <execution>
-		                  <id>deploy</id>
-		                  <phase>deploy</phase>
-		                  <goals>
-		                     <goal>deploy</goal>
-		                  </goals>
-		               </execution>
-		            </executions>
-		         </plugin>			
-					
-				</plugins>
-			</build>
-		</profile>
+    
+     <profiles>
+     
+		
 		<profile>
 			<id>arm</id>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.mule.tools.maven</groupId>
-						<artifactId>mule-maven-plugin</artifactId>
-						<version>3.1.2</version>
-						<configuration>
-							<businessGroup>${anypoint.businessGroup}</businessGroup>
-							<deploymentType>arm</deploymentType>
-							<uri>https://anypoint.mulesoft.com</uri>
-          <target>${arm.target.name}</target>
-          
-          <username>${anypoint.username}</username>
-          <password>${anypoint.password}</password>
-          <environment>Sandbox</environment>
-							
-							
-							
-							
-						</configuration>
-						<executions>
+					    <groupId>org.mule.tools.maven</groupId>
+					    <artifactId>mule-maven-plugin</artifactId>
+					    <version>${mule.maven.plugin.version}</version>
+					    <configuration>
+					    
+					    <armDeployment>
+						      <muleVersion>${app.runtime}</muleVersion>
+					          <uri>${anypoint.uri}</uri>
+					          <target>${arm.target.name}</target>
+					          <targetType>server</targetType>
+					          <username>${anypoint.username}</username>
+					          <password>${anypoint.password}</password>
+					          <environment>${arm.environment}</environment>
+					          <businessGroup>${anypoint.businessGroup}</businessGroup>
+				      	</armDeployment>
+	
+					    </configuration>
+					    <executions>
 							<execution>
 								<id>deploy</id>
 								<phase>deploy</phase>
@@ -298,10 +178,10 @@
 								</goals>
 							</execution>
 						</executions>
+					    
 					</plugin>
-				</plugins>
-			</build>
+			</plugins>
+		</build>
 		</profile>
 	</profiles>
-
 </project>

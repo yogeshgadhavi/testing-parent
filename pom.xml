@@ -10,12 +10,13 @@
 
 	<name>testing-parent</name>
 
-    <properties>
-		<mule.runtime.community>true</mule.runtime.community>
+	
+	 <properties>
+	 <mule.runtime.community>true</mule.runtime.community>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<mule.version>4.1.1</mule.version>
+		<app.runtime>4.1.1</app.runtime>
 		<mule.maven.plugin.version>3.1.1</mule.maven.plugin.version>
 		<munit.version>2.1.1</munit.version>
 	
@@ -28,9 +29,9 @@
 		<arm.target.type>server</arm.target.type>
 		<arm.environment>Sandbox</arm.environment>
 		
-	</properties>
+		
+    </properties>
 
-	
 	<build>
 		<plugins>
 			<plugin>
@@ -131,18 +132,18 @@
 					<plugin>
 					    <groupId>org.mule.tools.maven</groupId>
 					    <artifactId>mule-maven-plugin</artifactId>
-					    <version>${mule.maven.plugin.version}</version>
+					    <version>3.1.1</version>
 					    <configuration>
 					    
 					    <armDeployment>
-						      <muleVersion>${mule.version}</muleVersion>
-					          <uri>${anypoint.uri}</uri>
-					          <target>${arm.target.name}</target>
+						      <muleVersion>${app.runtime}</muleVersion>
+					          <uri>https://anypoint.mulesoft.com</uri>
+					          <target>test-apprhel74mutest08-mule411</target>
 					          <targetType>server</targetType>
-					          <username>${anypoint.username}</username>
-					          <password>${anypoint.password}</password>
-					          <environment>${arm.environment}</environment>
-					          <businessGroup>${anypoint.businessGroup}</businessGroup>
+					          <username>bimehta</username>
+					          <password>Mel2018a</password>
+					          <environment>Sandbox</environment>
+					          <businessGroup>ANZ-Architecture-Simplification</businessGroup>
 				      	</armDeployment>
 	
 					    </configuration>

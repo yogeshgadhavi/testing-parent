@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.1.1</app.runtime>
+		<mule.version>4.1.1</mule.version>
 		<mule.maven.plugin.version>3.1.1</mule.maven.plugin.version>
 		<munit.version>2.1.1</munit.version>
 	
@@ -158,7 +158,7 @@
 					    <configuration>
 					    
 					    <armDeployment>
-						      <muleVersion>${app.runtime}</muleVersion>
+						      <muleVersion>${mule.version}</muleVersion>
 					          <uri>${anypoint.uri}</uri>
 					          <target>${arm.target.name}</target>
 					          <targetType>server</targetType>
